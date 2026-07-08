@@ -9,12 +9,12 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <style>
-  /* ══════════════════════════════════════════════════════════
+  /* ════════════════════════════════════════════════════════
      Knomee comments overlay — "Neutral Frost"
      Every rule is scoped under .cc-stage / a .cc- prefix so
      nothing leaks into (or out of) the host prototype, which
      additionally lives in its own iframe.
-     ══════════════════════════════════════════════════════════ */
+     ════════════════════════════════════════════════════════ */
 
   .cc-stage {
     /* ── design tokens (Neutral Frost defaults) ── */
@@ -295,10 +295,10 @@
     z-index: 100; max-width: 460px; text-align: center;
   }
 
-  /* ══════════════════════════════════════════════════════════
+  /* ════════════════════════════════════════════════════════
      Theme preset: 1B "Smoke Tray" — dark translucent chrome,
      floating detached rail + pill top bar. Pins unchanged.
-     ══════════════════════════════════════════════════════════ */
+     ════════════════════════════════════════════════════════ */
   .cc-stage[data-cc-theme="smoke-tray"] {
     --cc-text:  #ffffff;
     --cc-muted: rgba(255,255,255,0.6);
@@ -326,10 +326,10 @@
   .cc-stage[data-cc-theme="smoke-tray"] .cc-fab:not(.cc-mode *) { color: #fff; }
   .cc-stage[data-cc-theme="smoke-tray"] .cc-clear-btn:hover { color: #fff; }
 
-  /* ══════════════════════════════════════════════════════════
+  /* ════════════════════════════════════════════════════════
      Theme preset: 1C "Branded Frost" — Neutral Frost plus a faint
      purple wash, purple accents, compact single-line rail rows.
-     ══════════════════════════════════════════════════════════ */
+     ════════════════════════════════════════════════════════ */
   .cc-stage[data-cc-theme="branded-frost"] {
     --cc-panel-wash: linear-gradient(rgba(74,28,114,0.07), rgba(74,28,114,0.03));
     --cc-pin-ring: var(--cc-purple);
@@ -394,7 +394,7 @@
 (function () {
   'use strict';
 
-  // ─────────────────────────────────────────
+  // ────────────────────────────────────────────────────────
   // Config. PROJECT_ID must be unique per deployed prototype —
   // comments are namespaced by it in the shared Firestore project, so
   // two repos left on "change-me" would share one comment thread.
@@ -403,11 +403,11 @@
   // SEED_DEMO: true = local demo mode — no Firestore/localStorage,
   //            seeds 3 comments and opens one thread. For previewing
   //            the overlay itself; leave false in real projects.
-  // ─────────────────────────────────────────
+  // ────────────────────────────────────────────────────────
   const PROJECT_ID  = 'billing-analytics';
   const THEME       = 'neutral-frost';
   const SEED_DEMO   = false;
-  // ─────────────────────────────────────────
+  // ────────────────────────────────────────────────────────
 
   const stage    = document.getElementById('ccStage');
   const frame    = document.getElementById('ccFrame');
@@ -434,7 +434,7 @@
   let commentMode = false;
   let currentScreen = 'default';
 
-  // ── Shared storage (Firestore) ─────────────────────────
+  // ── Shared storage (Firestore) ──────────────────────────
   // Deliberate deviation from the design spec's localStorage-only
   // persistence: comments must be shared across reviewers/devices (same
   // behavior as the knomee-video feedback tool), so Firestore is the
@@ -538,7 +538,7 @@
     }
   }
 
-  // ── Namespace conflict detection ───────────────────────
+  // ── Namespace conflict detection ─────────────────────────
   // Warns if and only if a different deployment is actually using this
   // PROJECT_ID. Each deployed site stamps the state doc with its URL;
   // finding someone else's stamp means two sites share one thread.
@@ -556,7 +556,7 @@
     }).catch(err => console.warn('Namespace conflict check failed', err));
   }
 
-  // ── Screens ─────────────────────────────────────
+  // ── Screens ──────────────────────────────────────────────
   // Pins belong to a screen. The overlay reads the prototype's current
   // screen id without requiring integration: a prototype can expose
   // window.__ccScreenId, or use the .screen.active convention (like the
@@ -580,7 +580,7 @@
     }
   }, 400);
 
-  // ── Helpers ─────────────────────────────────────
+  // ── Helpers ──────────────────────────────────────────────
   function relTime(ts) {
     const s = Math.floor((Date.now() - ts) / 1000);
     if (s < 10) return 'Just now';
@@ -606,7 +606,7 @@
     return list.sort((a, b) => a.createdAt - b.createdAt);
   }
 
-  // ── Capture (rail thumbnails) ───────────────────────
+  // ── Capture (rail thumbnails) ────────────────────────────
   function captureFrame() {
     let target;
     try { target = proto.contentDocument.body; } catch (e) { target = null; }
@@ -620,7 +620,7 @@
     }).then(c => c.toDataURL('image/jpeg', 0.8)).catch(() => null);
   }
 
-  // ── Rendering ───────────────────────────────────
+  // ── Rendering ────────────────────────────────────────────
   function renderAll() { renderPins(); renderRail(); }
 
   function renderPins() {
@@ -697,7 +697,7 @@
     });
   }
 
-  // ── Thread popover ────────────────────────────────
+  // ── Thread popover ───────────────────────────────────────
   function clampPopover(el, xPct, yPct) {
     const fw = frame.clientWidth, fh = frame.clientHeight;
     const px = (xPct / 100) * fw, py = (yPct / 100) * fh;
@@ -858,7 +858,7 @@
     renderAll();
   }
 
-  // ── Comment mode ────────────────────────────────
+  // ── Comment mode ─────────────────────────────────────────
   function setMode(on) {
     commentMode = on;
     stage.classList.toggle('cc-mode', on);
@@ -931,7 +931,7 @@
     if (commentMode) { e.preventDefault(); setMode(false); }
   }, true);
 
-  // ── Clear all ───────────────────────────────────
+  // ── Clear all ────────────────────────────────────────────
   clearBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!store.threads.length) return;
@@ -968,7 +968,7 @@
     openThread(store.threads[1].id);
   }
 
-  // ── Init ───────────────────────────────────────
+  // ── Init ─────────────────────────────────────────────────
   try { if (localStorage.getItem(RAIL_COLLAPSED_KEY) === '1') setRailCollapsed(true); } catch (e) { /* default expanded */ }
   loadLocalFallback();
   renderAll();
