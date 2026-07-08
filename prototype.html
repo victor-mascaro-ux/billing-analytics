@@ -3,150 +3,311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dummy Prototype</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>knomee Advisor — My Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --purple: #240446;
-    --purple-mid: #7639A1;
-    --purple-light: #e9d9f4;
-    --teal: #3dbdaa;
-    --border: #e2e2e2;
-    --text: #1a1a2e;
-    --muted: #6b7280;
-  }
-  html, body { height: 100%; font-family: 'Poppins', sans-serif; color: var(--text); background: #f7f5fa; }
-  .screen { display: none; min-height: 100vh; flex-direction: column; }
-  .screen.active { display: flex; }
-
-  .topbar {
-    height: 56px; background: var(--purple); display: flex; align-items: center;
-    gap: 10px; padding: 0 24px; flex-shrink: 0;
-  }
-  .topbar-logo { width: 22px; height: 22px; border-radius: 6px; background: var(--teal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: var(--purple); }
-  .topbar-title { color: white; font-size: 14px; font-weight: 600; }
-
-  .content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
-  .card { width: 100%; max-width: 460px; background: white; border: 1.5px solid var(--border); border-radius: 16px; padding: 36px; box-shadow: 0 4px 20px rgba(36,4,70,0.08); }
-
-  h1 { font-size: 20px; font-weight: 700; color: var(--purple); margin-bottom: 8px; }
-  p.sub { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-bottom: 24px; }
-
-  .field { margin-bottom: 16px; }
-  .field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .field input, .field select { width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 11px 13px; font-size: 13.5px; font-family: inherit; outline: none; color: var(--text); }
-  .field input:focus, .field select:focus { border-color: var(--teal); }
-
-  .btn { font-family: inherit; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 14px; padding: 12px 18px; transition: background 0.15s; }
-  .btn-primary { background: var(--purple); color: white; width: 100%; }
-  .btn-primary:hover { background: var(--purple-mid); }
-  .btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
-  .btn-ghost:hover { background: #f5f5f7; }
-
-  .row { display: flex; gap: 10px; margin-top: 22px; }
-  .row .btn { flex: 1; }
-
-  .plan-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-  .plan {
-    border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 16px;
-    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .plan:hover { border-color: var(--teal); background: #f0faf8; }
-  .plan.selected { border-color: var(--purple); background: var(--purple-light); }
-  .plan-name { font-size: 13.5px; font-weight: 600; }
-  .plan-price { font-size: 13px; color: var(--muted); }
-
-  .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--teal); color: white; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 50px; margin-bottom: 14px; }
-  .success-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; margin: 0 auto 18px; }
-  .center { text-align: center; }
-
-  .dots { display: flex; justify-content: center; gap: 6px; margin-top: 20px; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
-  .dot.on { background: var(--purple); }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#E9E6F0;font-family:'Mulish',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;color:#241C33;padding:26px 20px;min-height:100vh;}
+  .scr{width:100%;max-width:1200px;margin:0 auto;background:#fff;border:1px solid #E1DEEA;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(36,4,70,.13);}
+  .nav{height:52px;background:#240446;display:flex;align-items:center;justify-content:space-between;padding:0 22px;}
+  .nav svg{height:19px;width:auto;display:block;}
+  .burger{width:26px;height:16px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;}
+  .burger span{height:2px;background:#fff;border-radius:2px;display:block;}
+  .head{padding:26px 32px 0;}
+  .book{margin:0;font-size:29px;font-weight:800;color:#240446;letter-spacing:-.4px;}
+  .tabs{display:flex;gap:24px;margin-top:18px;border-bottom:1px solid #E7E5EF;flex-wrap:wrap;}
+  .tab{appearance:none;background:none;border:0;font-family:inherit;padding:0 2px 13px;font-size:15px;border-bottom:3px solid transparent;margin-bottom:-1px;color:#8E88A0;font-weight:600;white-space:nowrap;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:color .12s;}
+  .tab:hover{color:#5B5470;}
+  .tab.on{color:#240446;font-weight:800;border-bottom-color:#240446;}
+  .tab .opt{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;border-radius:5px;background:#EFEAF7;color:#7A3FF2;font-size:11px;font-weight:800;}
+  .tab.on .opt{background:#7A3FF2;color:#fff;}
+  .screen{display:none;}
+  .screen.active{display:block;}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:.7px;color:#8E88A0;text-transform:uppercase;}
+  .card{background:#fff;border:1px solid #E7E5EF;border-radius:12px;}
+  .sec{display:flex;align-items:center;gap:9px;margin:2px 0;}
+  .sec b{font-size:16px;font-weight:800;color:#240446;}
+  .num{font-weight:800;color:#201A2E;line-height:1;}
 </style>
 </head>
 <body>
 
-  <!-- Screen 1: Landing -->
-  <div class="screen active" id="screen1">
-    <div class="topbar"><div class="topbar-logo">K</div><div class="topbar-title">Dummy Prototype — Onboarding</div></div>
-    <div class="content">
-      <div class="card">
-        <h1>Welcome to Knomee</h1>
-        <p class="sub">This is a throwaway prototype for testing the persistent-comments template. Click through the screens and try leaving comments on each one.</p>
-        <div class="field">
-          <label>Full name</label>
-          <input type="text" placeholder="Jane Doe">
-        </div>
-        <div class="field">
-          <label>Work email</label>
-          <input type="email" placeholder="jane@company.com">
-        </div>
-        <button class="btn btn-primary" onclick="goTo('screen2')">Continue</button>
-        <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
-      </div>
+  <div class="scr">
+    <div class="nav">
+      <svg width="236" height="24" viewBox="0 0 236 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M151.664 17.7879H146.827L146.052 20.0771H142.748L147.437 7.11728H151.092L155.781 20.0771H152.44L151.664 17.7879ZM150.852 15.351L149.246 10.6065L147.658 15.351H150.852ZM161.879 7.11728C163.245 7.11728 164.439 7.38804 165.461 7.92958C166.482 8.47111 167.27 9.23418 167.824 10.2188C168.39 11.1911 168.673 12.3172 168.673 13.5972C168.673 14.8649 168.39 15.991 167.824 16.9756C167.27 17.9602 166.476 18.7233 165.442 19.2648C164.421 19.8064 163.233 20.0771 161.879 20.0771H157.024V7.11728H161.879ZM161.676 17.3449C162.87 17.3449 163.799 17.0187 164.464 16.3664C165.128 15.7141 165.461 14.791 165.461 13.5972C165.461 12.4034 165.128 11.4742 164.464 10.8095C163.799 10.1449 162.87 9.81263 161.676 9.81263H160.181V17.3449H161.676ZM182.419 7.11728L177.822 20.0771H173.871L169.274 7.11728H172.634L175.846 16.9018L179.077 7.11728H182.419ZM186.71 7.11728V20.0771H183.553V7.11728H186.71ZM193.503 20.2064C192.555 20.2064 191.706 20.0525 190.955 19.7448C190.204 19.4372 189.601 18.9818 189.146 18.3787C188.703 17.7756 188.469 17.0495 188.444 16.2003H191.804C191.853 16.6803 192.019 17.0495 192.303 17.3079C192.586 17.5541 192.955 17.6772 193.41 17.6772C193.878 17.6772 194.247 17.5726 194.518 17.3633C194.789 17.1418 194.924 16.8403 194.924 16.4587C194.924 16.1387 194.813 15.8741 194.592 15.6649C194.383 15.4557 194.118 15.2833 193.798 15.148C193.49 15.0126 193.047 14.8587 192.469 14.6864C191.632 14.428 190.949 14.1695 190.419 13.9111C189.89 13.6526 189.435 13.2711 189.053 12.7665C188.672 12.2618 188.481 11.6034 188.481 10.7911C188.481 9.58494 188.918 8.64342 189.792 7.9665C190.666 7.27728 191.804 6.93266 193.207 6.93266C194.635 6.93266 195.786 7.27728 196.659 7.9665C197.533 8.64342 198.001 9.5911 198.062 10.8095H194.647C194.623 10.3911 194.469 10.0649 194.186 9.8311C193.903 9.58494 193.539 9.46187 193.096 9.46187C192.715 9.46187 192.407 9.56648 192.173 9.77571C191.939 9.97263 191.823 10.2619 191.823 10.6434C191.823 11.0619 192.019 11.388 192.413 11.6218C192.807 11.8557 193.423 12.108 194.259 12.3788C195.096 12.6618 195.773 12.9326 196.29 13.1911C196.819 13.4495 197.275 13.8249 197.656 14.3172C198.038 14.8095 198.229 15.4433 198.229 16.2187C198.229 16.9572 198.038 17.6279 197.656 18.231C197.287 18.8341 196.746 19.3141 196.032 19.671C195.318 20.0279 194.475 20.2064 193.503 20.2064ZM206.116 20.2064C204.898 20.2064 203.778 19.9233 202.756 19.3572C201.747 18.791 200.941 18.0033 200.338 16.9941C199.747 15.9726 199.451 14.828 199.451 13.5603C199.451 12.2926 199.747 11.1542 200.338 10.1449C200.941 9.13572 201.747 8.34803 202.756 7.78189C203.778 7.21574 204.898 6.93266 206.116 6.93266C207.334 6.93266 208.448 7.21574 209.457 7.78189C210.479 8.34803 211.279 9.13572 211.857 10.1449C212.448 11.1542 212.744 12.2926 212.744 13.5603C212.744 14.828 212.448 15.9726 211.857 16.9941C211.267 18.0033 210.467 18.791 209.457 19.3572C208.448 19.9233 207.334 20.2064 206.116 20.2064ZM206.116 17.3264C207.15 17.3264 207.974 16.9818 208.59 16.2926C209.217 15.6033 209.531 14.6926 209.531 13.5603C209.531 12.4157 209.217 11.5049 208.59 10.828C207.974 10.1388 207.15 9.79417 206.116 9.79417C205.07 9.79417 204.233 10.1326 203.605 10.8095C202.99 11.4865 202.682 12.4034 202.682 13.5603C202.682 14.7049 202.99 15.6218 203.605 16.311C204.233 16.9879 205.07 17.3264 206.116 17.3264ZM220.924 20.0771L218.229 15.1849H217.472V20.0771H214.315V7.11728H219.614C220.635 7.11728 221.503 7.29574 222.217 7.65266C222.943 8.00958 223.484 8.50188 223.841 9.12956C224.198 9.74494 224.377 10.4342 224.377 11.1972C224.377 12.0588 224.131 12.828 223.638 13.5049C223.158 14.1818 222.444 14.6618 221.497 14.9449L224.487 20.0771H220.924ZM217.472 12.9511H219.429C220.008 12.9511 220.438 12.8095 220.721 12.5265C221.017 12.2434 221.164 11.8434 221.164 11.3265C221.164 10.8342 221.017 10.4465 220.721 10.1634C220.438 9.88033 220.008 9.73879 219.429 9.73879H217.472V12.9511Z" fill="white"></path>
+<g clip-path="url(#clip0_1164_57289)">
+<path d="M13.0751 15.7081C13.0445 15.7081 13.0087 15.7081 12.978 15.7029C8.75303 15.2205 7.35668 13.5034 6.90145 12.5283C6.23139 11.086 6.5792 9.59725 7.79145 8.72582C8.8963 7.93211 10.3386 7.99433 11.2185 8.8762C11.5612 9.21862 11.5663 9.78407 11.2287 10.1316C10.891 10.4791 10.3337 10.4843 9.99084 10.1419C9.67372 9.8255 9.15198 9.91887 8.80419 10.1731C8.56384 10.3443 8.05744 10.8474 8.48707 11.7708C8.71722 12.2636 9.57149 13.4101 12.6353 13.8665C14.2363 11.1742 13.9038 9.77885 13.6787 9.28606C13.4895 8.88141 13.2286 8.62723 12.9013 8.5235C12.5944 8.43013 12.2312 8.47677 11.9345 8.65316C11.5202 8.90213 10.9832 8.76211 10.7377 8.34189C10.4921 7.92175 10.6303 7.37705 11.0446 7.12806C11.7658 6.69231 12.6353 6.58338 13.4127 6.82719C13.9753 7.00356 14.7529 7.4393 15.2592 8.52864C15.7145 9.50909 16.1339 11.6878 13.8118 15.3034C13.648 15.5577 13.3718 15.7081 13.0803 15.7081H13.0751Z" fill="white"></path>
+<path d="M14.4625 22.5287C14.038 22.5287 13.6441 22.2486 13.5111 21.8128C13.3525 21.2786 13.6491 20.7131 14.1709 20.5523C17.4803 19.5252 19.9713 16.7551 20.6669 13.321C21.1733 10.8154 20.6873 8.26322 19.3012 6.13121C17.915 3.99918 15.7924 2.54152 13.3218 2.02277C12.7848 1.90864 12.437 1.37435 12.5495 0.829662C12.6621 0.284979 13.1838 -0.0677675 13.7259 0.0463562C16.7131 0.668848 19.2858 2.43776 20.9635 5.02111C22.6412 7.60446 23.2295 10.6962 22.6156 13.7308C21.7717 17.8911 18.759 21.2474 14.754 22.4872C14.6569 22.5183 14.5596 22.5339 14.4625 22.5339V22.5287Z" fill="white"></path>
+<path d="M9.32621 22.77C9.25972 22.77 9.19323 22.7648 9.12674 22.7492C6.13961 22.1267 3.5668 20.363 1.8891 17.7744C0.211402 15.1912 -0.376815 12.0994 0.236976 9.06475C1.1679 4.45833 4.71255 0.904949 9.26486 0.0178968C9.80699 -0.0858517 10.3287 0.272078 10.4311 0.816755C10.5333 1.36663 10.1804 1.89574 9.64333 1.9995C5.88386 2.73611 2.95812 5.66702 2.18577 9.47461C1.67939 11.9802 2.1653 14.5324 3.55146 16.6644C4.9376 18.7965 7.0603 20.2541 9.53075 20.7728C10.0679 20.8869 10.4158 21.4213 10.3032 21.9659C10.206 22.4432 9.79165 22.77 9.33135 22.77H9.32621Z" fill="white"></path>
+<path d="M4.65135 10.7832C4.57975 10.7832 4.50813 10.7728 4.43653 10.7573C3.91991 10.6379 3.59768 10.1141 3.72043 9.59013C4.19613 7.49956 5.44417 5.72546 7.23951 4.58941C9.02973 3.45337 11.1524 3.09543 13.2138 3.57786C16.0372 4.24186 18.2775 6.4102 19.055 9.24771C19.1982 9.76652 18.9016 10.3007 18.39 10.446C17.8786 10.5913 17.3518 10.2852 17.2085 9.77166C16.6203 7.62406 14.9222 5.97964 12.779 5.47646C11.219 5.10816 9.61282 5.38309 8.25231 6.24421C6.89681 7.10533 5.95055 8.44887 5.58739 10.0311C5.48508 10.4824 5.09124 10.7832 4.65135 10.7832Z" fill="white"></path>
+<path d="M11.4211 19.4239C10.8329 19.4239 10.2344 19.3566 9.64113 19.2164C6.51076 18.485 4.14766 15.9328 3.6157 12.7217C3.52875 12.1926 3.88169 11.6895 4.4034 11.6012C4.92513 11.5131 5.42128 11.871 5.50823 12.4001C5.91231 14.8331 7.70254 16.7628 10.0708 17.3178C13.2932 18.0701 16.5155 16.0261 17.2624 12.7633C17.3799 12.2393 17.8966 11.9125 18.4132 12.037C18.9298 12.1563 19.252 12.6803 19.1293 13.2041C18.2853 16.908 15.022 19.4239 11.4211 19.4239Z" fill="white"></path>
+<path d="M34.5267 14.8935H33.2685V20.5167H29.9336V0.949707H33.2685V12.2843H34.8797L38.5983 7.434H42.3986L37.3451 13.6693L42.946 20.5116H38.8745L34.5319 14.8883L34.5267 14.8935Z" fill="white"></path>
+<path d="M56.9382 12.0646V20.0999H53.6033V12.5367C53.6033 10.8456 52.7286 9.73555 51.0919 9.73555C48.9589 9.73555 48.0024 11.6756 48.0024 13.3096V20.0999H44.6675V7.02244L47.2352 6.9135C47.4807 7.82649 47.6444 9.18559 47.6444 9.76662H47.7263C48.3809 8.18964 49.6955 6.85645 52.0432 6.85645C55.2144 6.85645 56.9332 9.04557 56.9332 12.0646H56.9382Z" fill="white"></path>
+<path d="M72.8629 13.5897C72.8629 17.527 70.1878 20.266 66.1162 20.266C62.0448 20.266 59.3696 17.5218 59.3696 13.5897C59.3696 9.65759 62.0755 6.85645 66.1162 6.85645C70.1571 6.85645 72.8629 9.65759 72.8629 13.5897ZM69.4768 13.5897C69.4768 11.2605 68.1674 9.62652 66.1162 9.62652C64.0652 9.62652 62.7557 11.2605 62.7557 13.5897C62.7557 15.9189 64.0652 17.4959 66.1162 17.4959C68.1674 17.4959 69.4768 15.8878 69.4768 13.5897Z" fill="white"></path>
+<path d="M96.2269 12.1282V20.1116H92.8921V12.5743C92.8921 10.8831 92.0429 9.80418 90.4063 9.80418C88.3855 9.80418 87.4802 11.7184 87.4802 13.3213V20.1116H84.1454V12.5743C84.1454 10.8831 83.2962 9.80418 81.6597 9.80418C79.6396 9.80418 78.7645 11.7184 78.7645 13.3213V20.1116H75.4297V7.0341L77.9974 6.92516C78.2429 7.78628 78.4065 9.19729 78.4065 9.77824H78.4322C79.0613 8.17019 80.3448 6.89404 82.6108 6.89404C84.8767 6.89404 86.4627 8.05602 87.1173 9.88719C87.7206 8.22206 89.0306 6.89404 91.3527 6.89404C94.4678 6.89404 96.2166 9.08313 96.2166 12.1334L96.2269 12.1282Z" fill="white"></path>
+<path d="M109.336 16.0797L111.029 17.9368C110.046 19.2389 108.159 20.266 105.566 20.266C101.274 20.266 98.6812 17.5218 98.6812 13.5897C98.6812 9.65759 101.249 6.85645 105.213 6.85645C109.177 6.85645 111.141 9.4865 111.141 13.0087C111.141 13.8387 111.003 14.3679 111.003 14.3679H102.041C102.344 16.308 103.653 17.6359 105.924 17.6359C107.781 17.6359 108.793 16.7489 109.34 16.0849L109.336 16.0797ZM102.041 12.4485H108.001C107.976 10.7314 106.906 9.48128 105.213 9.48128C103.52 9.48128 102.344 10.6174 102.041 12.4485Z" fill="white"></path>
+<path d="M123.711 16.0797L125.403 17.9368C124.421 19.2389 122.534 20.266 119.94 20.266C115.649 20.266 113.056 17.5218 113.056 13.5897C113.056 9.65759 115.624 6.85645 119.588 6.85645C123.552 6.85645 125.516 9.4865 125.516 13.0087C125.516 13.8387 125.378 14.3679 125.378 14.3679H116.416C116.718 16.308 118.028 17.6359 120.298 17.6359C122.155 17.6359 123.168 16.7489 123.716 16.0849L123.711 16.0797ZM116.416 12.4485H122.375C122.35 10.7314 121.281 9.48128 119.588 9.48128C117.894 9.48128 116.718 10.6174 116.416 12.4485Z" fill="white"></path>
+<path d="M131.28 6.87807L130.501 5.50175H130.167V6.87807H129.458V3.34619H130.784C131.057 3.34619 131.29 3.3951 131.482 3.49293C131.675 3.58738 131.818 3.71726 131.913 3.88255C132.01 4.04447 132.059 4.22663 132.059 4.42903C132.059 4.66179 131.992 4.87262 131.856 5.06153C131.722 5.24706 131.521 5.37525 131.255 5.44609L132.099 6.87807H131.28ZM130.167 4.97045H130.758C130.951 4.97045 131.094 4.92491 131.188 4.83383C131.283 4.73938 131.331 4.6095 131.331 4.44421C131.331 4.28229 131.283 4.15748 131.188 4.06977C131.094 3.97869 130.951 3.93315 130.758 3.93315H130.167V4.97045Z" fill="white"></path>
+<path d="M133.932 5.13875C133.932 3.39215 132.516 1.97625 130.77 1.97625C129.023 1.97625 127.607 3.39215 127.607 5.13875C127.607 6.88535 129.023 8.30125 130.77 8.30125C132.516 8.30125 133.932 6.88535 133.932 5.13875ZM134.565 5.13875C134.565 7.23467 132.866 8.93375 130.77 8.93375C128.674 8.93375 126.975 7.23467 126.975 5.13875C126.975 3.04283 128.674 1.34375 130.77 1.34375C132.866 1.34375 134.565 3.04283 134.565 5.13875Z" fill="white"></path>
+</g>
+<defs>
+<clipPath id="clip0_1164_57289">
+<rect width="134.564" height="22.77" fill="white"></rect>
+</clipPath>
+</defs>
+</svg>
+      <div class="burger"><span></span><span></span><span></span></div>
     </div>
-  </div>
-
-  <!-- Screen 2: Plan selection -->
-  <div class="screen" id="screen2">
-    <div class="topbar"><div class="topbar-logo">K</div><div class="topbar-title">Dummy Prototype — Onboarding</div></div>
-    <div class="content">
-      <div class="card">
-        <h1>Choose a plan</h1>
-        <p class="sub">Pick the plan that fits your organization. You can change this later.</p>
-        <div class="plan-list" id="planList">
-          <div class="plan selected" data-plan="starter" onclick="selectPlan(this)">
-            <span class="plan-name">Starter</span>
-            <span class="plan-price">Free</span>
-          </div>
-          <div class="plan" data-plan="growth" onclick="selectPlan(this)">
-            <span class="plan-name">Growth</span>
-            <span class="plan-price">$29/mo</span>
-          </div>
-          <div class="plan" data-plan="scale" onclick="selectPlan(this)">
-            <span class="plan-name">Scale</span>
-            <span class="plan-price">$79/mo</span>
-          </div>
-        </div>
-        <div class="row">
-          <button class="btn btn-ghost" onclick="goTo('screen1')">Back</button>
-          <button class="btn btn-primary" onclick="goTo('screen3')">Continue</button>
-        </div>
-        <div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></div>
-      </div>
+    <div class="head">
+      <h1 class="book">My Book</h1>
+      <div class="tabs" id="tabs"><button class="tab" data-screen="prospects">Prospects</button><button class="tab" data-screen="clients">Clients</button><button class="tab on" data-screen="perf-a">Performance<span class="opt">A</span></button><button class="tab" data-screen="perf-b">Performance<span class="opt">B</span></button><button class="tab" data-screen="bill-a">Billing<span class="opt">A</span></button><button class="tab" data-screen="bill-b">Billing<span class="opt">B</span></button></div>
     </div>
-  </div>
-
-  <!-- Screen 3: Confirmation -->
-  <div class="screen" id="screen3">
-    <div class="topbar"><div class="topbar-logo">K</div><div class="topbar-title">Dummy Prototype — Onboarding</div></div>
-    <div class="content">
-      <div class="card center">
-        <div class="success-icon">✓</div>
-        <div class="badge">Setup complete</div>
-        <h1>You're all set</h1>
-        <p class="sub">Your organization has been created. This is the last screen in the dummy flow — comment on it, then use the sidebar to jump between everything you've flagged so far.</p>
-        <div class="row">
-          <button class="btn btn-ghost" onclick="goTo('screen2')">Back</button>
-          <button class="btn btn-primary" onclick="goTo('screen1')">Start over</button>
+    <div class="screens">
+      <section class="screen" id="prospects">
+        <div style="padding:60px 32px 80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;min-height:340px;">
+          <div style="width:52px;height:52px;border-radius:14px;background:#F1EEF7;display:flex;align-items:center;justify-content:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="4" rx="1.5" fill="#C9C1DC"></rect><rect x="3" y="10.5" width="18" height="4" rx="1.5" fill="#DCD6E8"></rect><rect x="3" y="17" width="11" height="4" rx="1.5" fill="#E7E3F0"></rect></svg>
+          </div>
+          <div style="font-size:17px;font-weight:800;color:#3A2F4D;">Prospects</div>
+          <div style="font-size:13px;font-weight:600;color:#8E88A0;max-width:340px;line-height:1.5;">This tab already exists in the advisor dashboard and isn&rsquo;t part of this prototype. Focus your comments on the Performance and Billing options.</div>
         </div>
-        <div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></div>
-      </div>
+      </section>
+
+      <section class="screen" id="clients">
+        <div style="padding:60px 32px 80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;min-height:340px;">
+          <div style="width:52px;height:52px;border-radius:14px;background:#F1EEF7;display:flex;align-items:center;justify-content:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="4" rx="1.5" fill="#C9C1DC"></rect><rect x="3" y="10.5" width="18" height="4" rx="1.5" fill="#DCD6E8"></rect><rect x="3" y="17" width="11" height="4" rx="1.5" fill="#E7E3F0"></rect></svg>
+          </div>
+          <div style="font-size:17px;font-weight:800;color:#3A2F4D;">Clients</div>
+          <div style="font-size:13px;font-weight:600;color:#8E88A0;max-width:340px;line-height:1.5;">This tab already exists in the advisor dashboard and isn&rsquo;t part of this prototype. Focus your comments on the Performance and Billing options.</div>
+        </div>
+      </section>
+
+      <section class="screen active" id="perf-a">
+        <div style="padding:24px 32px 34px;display:flex;flex-direction:column;gap:22px;">
+
+          <!-- Engagement -->
+          <div>
+            <div class="sec"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="8" width="3.2" height="7" rx="1" fill="#2DD2B0"></rect><rect x="6.4" y="4" width="3.2" height="11" rx="1" fill="#086375"></rect><rect x="11.8" y="1" width="3.2" height="14" rx="1" fill="#4A1C72"></rect></svg><b>Engagement</b></div>
+            <div style="display:flex;gap:14px;margin-top:12px;">
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">Prospects Invited</div><div class="num" style="font-size:33px;margin-top:9px;">64</div><div style="font-size:12px;font-weight:700;color:#8E88A0;margin-top:8px;">100% of outreach</div></div>
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">Signed Up</div><div class="num" style="font-size:33px;margin-top:9px;">40</div><div style="font-size:12px;font-weight:700;color:#0E8C6B;margin-top:8px;">63% of invited</div></div>
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">Profile Complete</div><div class="num" style="font-size:33px;margin-top:9px;">33</div><div style="font-size:12px;font-weight:700;color:#0E8C6B;margin-top:8px;">52% of invited</div></div>
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">Finished Onboarding</div><div class="num" style="font-size:33px;margin-top:9px;">27</div><div style="font-size:12px;font-weight:700;color:#0E8C6B;margin-top:8px;">42% of invited</div></div>
+            </div>
+          </div>
+
+          <!-- Prospect Outcomes -->
+          <div>
+            <div class="sec"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#7A3FF2" stroke-width="1.6"></circle><circle cx="8" cy="8" r="3.4" stroke="#7A3FF2" stroke-width="1.6"></circle><circle cx="8" cy="8" r="1.1" fill="#7A3FF2"></circle></svg><b>Prospect Outcomes</b></div>
+            <div style="display:flex;gap:14px;margin-top:12px;">
+              <div class="card" style="flex:1;padding:17px 19px;display:flex;justify-content:space-between;align-items:center;gap:16px;">
+                <div><div class="lbl">Converted Prospect → Client</div><div style="display:flex;align-items:baseline;gap:10px;margin-top:9px;"><span class="num" style="font-size:37px;">12</span><span style="font-size:14px;font-weight:800;color:#086375;">30% rate</span></div><div style="font-size:12px;color:#8E88A0;margin-top:6px;">of 40 scored prospects this year</div></div>
+                <div style="width:118px;"><div style="height:9px;background:#EEF0F3;border-radius:6px;overflow:hidden;"><div style="width:30%;height:100%;background:#086375;"></div></div><div style="font-size:11px;color:#8E88A0;margin-top:6px;text-align:right;">target 25%</div></div>
+              </div>
+              <div class="card" style="flex:1;padding:17px 19px;">
+                <div class="lbl">Average KQ Score</div>
+                <div class="num" style="font-size:37px;margin-top:9px;">65.6</div>
+                <div style="margin-top:13px;height:9px;border-radius:6px;background:linear-gradient(90deg,#B18FD4 0 39%,#5B97A1 39% 69%,#086375 69% 100%);position:relative;"><div style="position:absolute;left:65.6%;top:-4px;width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid #240446;transform:translateX(-50%);box-shadow:0 1px 3px rgba(0,0,0,.2);"></div></div>
+                <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:#8E88A0;margin-top:6px;"><span>0</span><span>Nurture</span><span>Considering</span><span>Ready</span><span>100</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- By Tier -->
+          <div>
+            <div class="sec"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2" width="13" height="3.2" rx="1.4" fill="#086375"></rect><rect x="1.5" y="6.4" width="10" height="3.2" rx="1.4" fill="#5B97A1"></rect><rect x="1.5" y="10.8" width="6" height="3.2" rx="1.4" fill="#B18FD4"></rect></svg><b>By Tier</b><span style="font-size:12px;font-weight:600;color:#8E88A0;">replaces the admin “Per advisor” table</span></div>
+            <div style="display:flex;height:30px;border-radius:7px;overflow:hidden;margin-top:12px;font-size:12px;font-weight:800;color:#fff;">
+              <div style="width:47.5%;background:#086375;display:flex;align-items:center;padding-left:12px;">19</div>
+              <div style="width:50%;background:#5B97A1;display:flex;align-items:center;padding-left:12px;">20</div>
+              <div style="width:2.5%;background:#B18FD4;"></div>
+            </div>
+            <div style="display:flex;gap:16px;font-size:11px;font-weight:700;color:#8E88A0;margin-top:7px;"><span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#086375;margin-right:5px;"></span>Ready Now 48%</span><span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#5B97A1;margin-right:5px;"></span>Considering 50%</span><span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#B18FD4;margin-right:5px;"></span>Nurture 2%</span></div>
+            <div class="card" style="margin-top:14px;overflow:hidden;">
+              <div style="display:flex;background:#F7F6FA;padding:11px 18px;font-size:11px;font-weight:800;letter-spacing:.5px;color:#8E88A0;text-transform:uppercase;"><div style="flex:2;">Tier</div><div style="flex:1;text-align:right;">Prospects</div><div style="flex:1;text-align:right;">Avg KQ</div><div style="flex:1;text-align:right;">Conversion</div><div style="flex:1;text-align:right;">KQ Range</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;align-items:center;"><div style="flex:2;display:flex;align-items:center;gap:9px;"><span style="width:10px;height:10px;border-radius:3px;background:#086375;"></span>Tier 1 · Ready Now</div><div style="flex:1;text-align:right;">19</div><div style="flex:1;text-align:right;">81</div><div style="flex:1;text-align:right;color:#0E8C6B;">42%</div><div style="flex:1;text-align:right;color:#8E88A0;">70–100</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;align-items:center;"><div style="flex:2;display:flex;align-items:center;gap:9px;"><span style="width:10px;height:10px;border-radius:3px;background:#5B97A1;"></span>Tier 2 · Considering</div><div style="flex:1;text-align:right;">20</div><div style="flex:1;text-align:right;">55</div><div style="flex:1;text-align:right;color:#0E8C6B;">15%</div><div style="flex:1;text-align:right;color:#8E88A0;">40–69</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;align-items:center;"><div style="flex:2;display:flex;align-items:center;gap:9px;"><span style="width:10px;height:10px;border-radius:3px;background:#B18FD4;"></span>Tier 3 · Nurture</div><div style="flex:1;text-align:right;">1</div><div style="flex:1;text-align:right;">31</div><div style="flex:1;text-align:right;color:#8E88A0;">0%</div><div style="flex:1;text-align:right;color:#8E88A0;">0–39</div></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="screen" id="perf-b">
+        <div style="padding:24px 32px 34px;display:flex;flex-direction:column;gap:18px;">
+
+          <div style="display:flex;gap:18px;align-items:stretch;">
+            <!-- Funnel -->
+            <div class="card" style="flex:1.55;padding:18px 20px;">
+              <div class="sec"><b style="font-size:15px;">Engagement funnel</b></div>
+              <div style="display:flex;flex-direction:column;gap:13px;margin-top:15px;">
+                <div><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#3A2F4D;margin-bottom:5px;"><span>Prospects invited</span><span>64</span></div><div style="height:26px;border-radius:7px;background:linear-gradient(90deg,#086375,#0a7285);width:100%;"></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#3A2F4D;margin-bottom:5px;"><span>Signed up</span><span>40 · 63%</span></div><div style="height:26px;border-radius:7px;background:linear-gradient(90deg,#12808f,#178f96);width:62.5%;"></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#3A2F4D;margin-bottom:5px;"><span>Profile complete</span><span>33 · 52%</span></div><div style="height:26px;border-radius:7px;background:linear-gradient(90deg,#1a9f9a,#22bca8);width:51.6%;"></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#3A2F4D;margin-bottom:5px;"><span>Finished onboarding</span><span>27 · 42%</span></div><div style="height:26px;border-radius:7px;background:linear-gradient(90deg,#2DD2B0,#59e0c4);width:42.2%;"></div></div>
+              </div>
+            </div>
+            <!-- KPI stack -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+              <div class="card" style="padding:17px 19px;flex:1;display:flex;flex-direction:column;justify-content:center;">
+                <div class="lbl">Prospect → Client</div>
+                <div style="display:flex;align-items:baseline;gap:10px;margin-top:9px;"><span class="num" style="font-size:40px;color:#086375;">30%</span><span style="font-size:13px;font-weight:700;color:#8E88A0;">12 converted</span></div>
+              </div>
+              <div class="card" style="padding:17px 19px;flex:1;">
+                <div class="lbl">Average KQ Score</div>
+                <div class="num" style="font-size:40px;margin-top:9px;">65.6</div>
+                <div style="margin-top:11px;height:8px;border-radius:6px;background:linear-gradient(90deg,#B18FD4 0 39%,#5B97A1 39% 69%,#086375 69% 100%);position:relative;"><div style="position:absolute;left:65.6%;top:-3.5px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #240446;transform:translateX(-50%);"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier cards -->
+          <div style="display:flex;gap:16px;">
+            <div class="card" style="flex:1;padding:15px 17px;border-top:3px solid #086375;"><div style="font-size:12px;font-weight:800;color:#086375;">Tier 1 · Ready Now</div><div style="display:flex;align-items:baseline;gap:8px;margin-top:9px;"><span class="num" style="font-size:30px;">19</span><span style="font-size:12px;font-weight:700;color:#8E88A0;">prospects</span></div><div style="display:flex;gap:16px;font-size:12px;font-weight:700;color:#5B5470;margin-top:10px;"><span>Avg KQ <b style="color:#201A2E;">81</b></span><span>Conv <b style="color:#0E8C6B;">42%</b></span></div></div>
+            <div class="card" style="flex:1;padding:15px 17px;border-top:3px solid #5B97A1;"><div style="font-size:12px;font-weight:800;color:#4d838d;">Tier 2 · Considering</div><div style="display:flex;align-items:baseline;gap:8px;margin-top:9px;"><span class="num" style="font-size:30px;">20</span><span style="font-size:12px;font-weight:700;color:#8E88A0;">prospects</span></div><div style="display:flex;gap:16px;font-size:12px;font-weight:700;color:#5B5470;margin-top:10px;"><span>Avg KQ <b style="color:#201A2E;">55</b></span><span>Conv <b style="color:#0E8C6B;">15%</b></span></div></div>
+            <div class="card" style="flex:1;padding:15px 17px;border-top:3px solid #B18FD4;"><div style="font-size:12px;font-weight:800;color:#8f66bf;">Tier 3 · Nurture</div><div style="display:flex;align-items:baseline;gap:8px;margin-top:9px;"><span class="num" style="font-size:30px;">1</span><span style="font-size:12px;font-weight:700;color:#8E88A0;">prospect</span></div><div style="display:flex;gap:16px;font-size:12px;font-weight:700;color:#5B5470;margin-top:10px;"><span>Avg KQ <b style="color:#201A2E;">31</b></span><span>Conv <b style="color:#8E88A0;">0%</b></span></div></div>
+          </div>
+
+          <!-- Monthly chart -->
+          <div class="card" style="padding:18px 20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><div class="sec"><b style="font-size:15px;">New prospects &amp; clients by month</b></div><div style="display:flex;gap:16px;font-size:11px;font-weight:700;color:#8E88A0;"><span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#2DD2B0;margin-right:5px;"></span>Prospects</span><span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#086375;margin-right:5px;"></span>Clients</span></div></div>
+            <div style="display:flex;align-items:flex-end;gap:48px;height:150px;padding:14px 14px 0;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="display:flex;align-items:flex-end;gap:8px;height:120px;"><div style="width:30px;height:69px;background:#2DD2B0;border-radius:5px 5px 0 0;position:relative;"><span style="position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;font-weight:800;color:#5B5470;">8</span></div><div style="width:30px;height:17px;background:#086375;border-radius:5px 5px 0 0;position:relative;"><span style="position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;font-weight:800;color:#5B5470;">2</span></div></div><span style="font-size:12px;font-weight:700;color:#8E88A0;">May</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="display:flex;align-items:flex-end;gap:8px;height:120px;"><div style="width:30px;height:120px;background:#2DD2B0;border-radius:5px 5px 0 0;position:relative;"><span style="position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;font-weight:800;color:#5B5470;">14</span></div><div style="width:30px;height:43px;background:#086375;border-radius:5px 5px 0 0;position:relative;"><span style="position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;font-weight:800;color:#5B5470;">5</span></div></div><span style="font-size:12px;font-weight:700;color:#8E88A0;">Jun</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="display:flex;align-items:flex-end;gap:8px;height:120px;"><div style="width:30px;height:94px;background:#2DD2B0;border-radius:5px 5px 0 0;position:relative;"><span style="position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;font-weight:800;color:#5B5470;">11</span></div><div style="width:30px;height:26px;background:#086375;border-radius:5px 5px 0 0;position:relative;"><span style="position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;font-weight:800;color:#5B5470;">3</span></div></div><span style="font-size:12px;font-weight:700;color:#8E88A0;">Jul</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="screen" id="bill-a">
+        <div style="padding:24px 32px 34px;display:flex;flex-direction:column;gap:22px;">
+
+          <!-- Plan hero -->
+          <div class="card" style="padding:20px 22px;background:linear-gradient(100deg,#240446,#3a1263);border:none;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:11px;font-weight:800;letter-spacing:.7px;color:#C0B7D6;text-transform:uppercase;">Current Plan</div>
+              <div style="display:flex;align-items:baseline;gap:12px;margin-top:8px;"><span style="font-size:26px;font-weight:900;">Advisor Pro</span><span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#2DD2B0;"><span style="width:8px;height:8px;border-radius:50%;background:#2DD2B0;"></span>Active</span></div>
+              <div style="font-size:13px;color:#C9C1DC;margin-top:8px;">$49 / month · renews Aug 12, 2026 · 1 seat</div>
+            </div>
+            <div style="display:flex;gap:10px;"><span style="display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:8px;background:#fff;color:#240446;font-size:13px;font-weight:800;">Manage plan</span><span style="display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:8px;border:1px solid rgba(255,255,255,.4);color:#fff;font-size:13px;font-weight:800;">View invoices</span></div>
+          </div>
+
+          <!-- Book reporting -->
+          <div>
+            <div class="sec"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="8" width="3.2" height="7" rx="1" fill="#2DD2B0"></rect><rect x="6.4" y="4" width="3.2" height="11" rx="1" fill="#086375"></rect><rect x="11.8" y="1" width="3.2" height="14" rx="1" fill="#4A1C72"></rect></svg><b>My book this month · Jul 2026</b></div>
+            <div style="display:flex;gap:14px;margin-top:12px;">
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">New Prospects</div><div class="num" style="font-size:31px;margin-top:9px;">11</div><div style="font-size:12px;font-weight:700;color:#0E8C6B;margin-top:8px;">+3 vs last month</div></div>
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">New Clients</div><div class="num" style="font-size:31px;margin-top:9px;">3</div><div style="font-size:12px;font-weight:700;color:#8E88A0;margin-top:8px;">−2 vs last month</div></div>
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">Active Clients</div><div class="num" style="font-size:31px;margin-top:9px;">12</div><div style="font-size:12px;font-weight:700;color:#8E88A0;margin-top:8px;">book total</div></div>
+              <div class="card" style="flex:1;padding:15px 17px;"><div class="lbl">Book Value / yr</div><div class="num" style="font-size:31px;margin-top:9px;">$48k</div><div style="font-size:12px;font-weight:700;color:#0E8C6B;margin-top:8px;">est. recurring</div></div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div style="display:flex;gap:14px;">
+            <div class="card" style="flex:1;padding:16px 18px;">
+              <div style="font-size:13px;font-weight:800;color:#3A2F4D;">New prospects &amp; clients by month</div>
+              <div style="display:flex;align-items:flex-end;gap:34px;height:120px;padding:12px 8px 0;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="display:flex;align-items:flex-end;gap:6px;height:92px;"><div style="width:22px;height:53px;background:#2DD2B0;border-radius:4px 4px 0 0;"></div><div style="width:22px;height:13px;background:#086375;border-radius:4px 4px 0 0;"></div></div><span style="font-size:11px;font-weight:700;color:#8E88A0;">May</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="display:flex;align-items:flex-end;gap:6px;height:92px;"><div style="width:22px;height:92px;background:#2DD2B0;border-radius:4px 4px 0 0;"></div><div style="width:22px;height:33px;background:#086375;border-radius:4px 4px 0 0;"></div></div><span style="font-size:11px;font-weight:700;color:#8E88A0;">Jun</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="display:flex;align-items:flex-end;gap:6px;height:92px;"><div style="width:22px;height:72px;background:#2DD2B0;border-radius:4px 4px 0 0;"></div><div style="width:22px;height:20px;background:#086375;border-radius:4px 4px 0 0;"></div></div><span style="font-size:11px;font-weight:700;color:#8E88A0;">Jul</span></div>
+                <div style="display:flex;gap:12px;font-size:10px;font-weight:700;color:#8E88A0;align-self:flex-start;margin-left:auto;"><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#2DD2B0;margin-right:4px;"></span>Prospects</span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#086375;margin-right:4px;"></span>Clients</span></div>
+              </div>
+            </div>
+            <div class="card" style="flex:1;padding:16px 18px;">
+              <div style="font-size:13px;font-weight:800;color:#3A2F4D;">Book value growth</div>
+              <svg viewBox="0 0 300 96" style="width:100%;height:96px;margin-top:12px;" preserveAspectRatio="none"><polyline points="0,80 100,58 200,40 300,22" fill="none" stroke="#4A1C72" stroke-width="2.5"></polyline><circle cx="0" cy="80" r="3.5" fill="#4A1C72"></circle><circle cx="100" cy="58" r="3.5" fill="#4A1C72"></circle><circle cx="200" cy="40" r="3.5" fill="#4A1C72"></circle><circle cx="300" cy="22" r="3.5" fill="#4A1C72"></circle></svg>
+              <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#8E88A0;"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span></div>
+            </div>
+          </div>
+
+          <!-- Billing history -->
+          <div>
+            <div class="sec"><b>Billing history</b></div>
+            <div class="card" style="margin-top:10px;overflow:hidden;">
+              <div style="display:flex;background:#F7F6FA;padding:11px 18px;font-size:11px;font-weight:800;letter-spacing:.5px;color:#8E88A0;text-transform:uppercase;"><div style="flex:1.4;">Period</div><div style="flex:1;text-align:right;">New prospects</div><div style="flex:1;text-align:right;">New clients</div><div style="flex:1;text-align:right;">Plan fee</div><div style="flex:1;text-align:right;">Total</div><div style="flex:1;text-align:right;">Status</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;"><div style="flex:1.4;">Jul 2026</div><div style="flex:1;text-align:right;">11</div><div style="flex:1;text-align:right;">3</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;color:#0E8C6B;">open</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;"><div style="flex:1.4;">Jun 2026</div><div style="flex:1;text-align:right;">14</div><div style="flex:1;text-align:right;">5</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;color:#8E88A0;">paid</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;"><div style="flex:1.4;">May 2026</div><div style="flex:1;text-align:right;">8</div><div style="flex:1;text-align:right;">2</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;color:#8E88A0;">paid</div></div>
+              <div style="display:flex;padding:13px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:800;background:#FCFBFE;"><div style="flex:1.4;color:#240446;">Lifetime</div><div style="flex:1;text-align:right;">40</div><div style="flex:1;text-align:right;">12</div><div style="flex:1;text-align:right;color:#8E88A0;">—</div><div style="flex:1;text-align:right;color:#240446;">$147</div><div style="flex:1;text-align:right;color:#8E88A0;"></div></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="screen" id="bill-b">
+        <div style="padding:24px 32px 34px;display:flex;flex-direction:column;gap:18px;">
+
+          <div style="display:flex;gap:18px;align-items:stretch;">
+            <!-- My Plan panel -->
+            <div class="card" style="flex:1;padding:0;overflow:hidden;">
+              <div style="padding:16px 18px;background:#240446;color:#fff;"><div style="font-size:11px;font-weight:800;letter-spacing:.7px;color:#C0B7D6;text-transform:uppercase;">My Plan</div><div style="display:flex;align-items:baseline;gap:10px;margin-top:7px;"><span style="font-size:22px;font-weight:900;">Advisor Pro</span><span style="font-size:12px;font-weight:800;color:#2DD2B0;">Active</span></div></div>
+              <div style="padding:16px 18px;display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8E88A0;font-weight:700;">Price</span><span style="font-weight:800;">$49 / month</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8E88A0;font-weight:700;">Next invoice</span><span style="font-weight:800;">Aug 12, 2026</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8E88A0;font-weight:700;">Seats</span><span style="font-weight:800;">1 of 1</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8E88A0;font-weight:700;">Payment</span><span style="font-weight:800;">Visa ···· 4242</span></div>
+                <span style="display:inline-flex;align-items:center;justify-content:center;height:36px;border-radius:8px;background:#240446;color:#fff;font-size:13px;font-weight:800;margin-top:4px;">Manage plan</span>
+              </div>
+            </div>
+            <!-- My Book panel -->
+            <div style="flex:1.5;display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;gap:14px;">
+                <div class="card" style="flex:1;padding:14px 16px;"><div class="lbl">New Prospects</div><div class="num" style="font-size:28px;margin-top:8px;">11</div><div style="font-size:11px;font-weight:700;color:#0E8C6B;margin-top:6px;">+3 MoM</div></div>
+                <div class="card" style="flex:1;padding:14px 16px;"><div class="lbl">New Clients</div><div class="num" style="font-size:28px;margin-top:8px;">3</div><div style="font-size:11px;font-weight:700;color:#8E88A0;margin-top:6px;">−2 MoM</div></div>
+                <div class="card" style="flex:1;padding:14px 16px;"><div class="lbl">Active Clients</div><div class="num" style="font-size:28px;margin-top:8px;">12</div><div style="font-size:11px;font-weight:700;color:#8E88A0;margin-top:6px;">book total</div></div>
+              </div>
+              <div class="card" style="padding:16px 18px;flex:1;">
+                <div style="font-size:13px;font-weight:800;color:#3A2F4D;">New prospects &amp; clients by month</div>
+                <div style="display:flex;align-items:flex-end;gap:36px;height:118px;padding:12px 6px 0;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="display:flex;align-items:flex-end;gap:6px;height:90px;"><div style="width:20px;height:52px;background:#2DD2B0;border-radius:4px 4px 0 0;"></div><div style="width:20px;height:13px;background:#086375;border-radius:4px 4px 0 0;"></div></div><span style="font-size:11px;font-weight:700;color:#8E88A0;">May</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="display:flex;align-items:flex-end;gap:6px;height:90px;"><div style="width:20px;height:90px;background:#2DD2B0;border-radius:4px 4px 0 0;"></div><div style="width:20px;height:32px;background:#086375;border-radius:4px 4px 0 0;"></div></div><span style="font-size:11px;font-weight:700;color:#8E88A0;">Jun</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:7px;"><div style="display:flex;align-items:flex-end;gap:6px;height:90px;"><div style="width:20px;height:71px;background:#2DD2B0;border-radius:4px 4px 0 0;"></div><div style="width:20px;height:19px;background:#086375;border-radius:4px 4px 0 0;"></div></div><span style="font-size:11px;font-weight:700;color:#8E88A0;">Jul</span></div>
+                  <div style="display:flex;gap:12px;font-size:10px;font-weight:700;color:#8E88A0;align-self:flex-start;margin-left:auto;"><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#2DD2B0;margin-right:4px;"></span>Prospects</span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#086375;margin-right:4px;"></span>Clients</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing history -->
+          <div class="card" style="overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;"><span style="font-size:14px;font-weight:800;color:#240446;">Billing history</span><span style="font-size:12px;font-weight:800;color:#7A3FF2;">Download all →</span></div>
+            <div style="display:flex;background:#F7F6FA;padding:10px 18px;font-size:11px;font-weight:800;letter-spacing:.5px;color:#8E88A0;text-transform:uppercase;"><div style="flex:1.4;">Period</div><div style="flex:1;text-align:right;">Prospects</div><div style="flex:1;text-align:right;">Clients</div><div style="flex:1;text-align:right;">Total</div><div style="flex:1;text-align:right;">Status</div></div>
+            <div style="display:flex;padding:12px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;"><div style="flex:1.4;">Jul 2026</div><div style="flex:1;text-align:right;">11</div><div style="flex:1;text-align:right;">3</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;color:#0E8C6B;">open</div></div>
+            <div style="display:flex;padding:12px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;"><div style="flex:1.4;">Jun 2026</div><div style="flex:1;text-align:right;">14</div><div style="flex:1;text-align:right;">5</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;color:#8E88A0;">paid</div></div>
+            <div style="display:flex;padding:12px 18px;border-top:1px solid #EFEEF4;font-size:14px;font-weight:700;"><div style="flex:1.4;">May 2026</div><div style="flex:1;text-align:right;">8</div><div style="flex:1;text-align:right;">2</div><div style="flex:1;text-align:right;">$49</div><div style="flex:1;text-align:right;color:#8E88A0;">paid</div></div>
+          </div>
+
+        </div>
+      </section>
     </div>
   </div>
 
 <script>
-  function goTo(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-  function selectPlan(el) {
-    document.querySelectorAll('.plan').forEach(p => p.classList.remove('selected'));
-    el.classList.add('selected');
-  }
+  // Tab switching. Each screen is a .screen element whose id the commenting
+  // overlay reads via the .screen.active convention, so comments are
+  // namespaced per option (Performance A/B, Billing A/B).
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var screens = document.querySelectorAll('.screen');
+    function show(id) {
+      screens.forEach(function (s) { s.classList.toggle('active', s.id === id); });
+      tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.screen === id); });
+      window.__ccScreenId = id;            // explicit hint for the overlay
+      window.scrollTo(0, 0);
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { show(t.dataset.screen); });
+    });
+    window.__ccScreenId = 'perf-a';
+  })();
 </script>
 </body>
 </html>
